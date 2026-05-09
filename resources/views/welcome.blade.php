@@ -24,7 +24,7 @@
             <div
                 class="bg-gradient-to-b from-yellow-400 to-yellow-600 rounded-2xl p-8 text-black flex flex-col justify-between h-[400px]">
                 <div>
-                    <h2 class="text-2xl font-black italic leading-tight uppercase">Kenapa harus beli di website Erigo
+                    <h2 class="text-2xl font-black italic leading-tight uppercase">Kenapa harus beli di website JadiDigital
                     </h2>
                     <ul class="mt-4 space-y-1 font-bold text-sm">
                         <li>• Gratis Ongkir</li>
@@ -65,16 +65,16 @@
                         class="bg-yellow-500 text-black text-[10px] font-black px-4 py-2 rounded-md uppercase mx-auto block mb-6">Pickup
                         In Store</button>
                     <div class="bg-black p-6 rounded-lg border border-white/10 mb-4 inline-block">
-                        <h3 class="text-3xl font-black italic tracking-tighter">ERIGO <span
-                                class="block text-xs font-normal not-italic tracking-normal">STORE</span></h3>
+                        <h3 class="text-3xl font-black italic tracking-tighter">Jadi <span
+                                class="block text-xs font-normal not-italic tracking-normal">Digital</span></h3>
                     </div>
                     <p class="text-xs text-gray-400 mb-4">Belanja Online di Webstore, <br> tersedia pilihan <span
                             class="text-white font-bold">Pick Up In Store!</span></p>
                     <div class="grid grid-cols-2 gap-x-4 gap-y-1 text-[8px] text-gray-500 uppercase font-bold">
-                        <p>Erigo Fulfillment Centre - Legok</p>
-                        <p>Erigo Neighborhood Store - Pamulang</p>
-                        <p>Erigo Neighborhood Store - Banjarbaru</p>
-                        <p>Erigo Neighborhood Store - Yogyakarta</p>
+                        <p>JadiDigital Fulfillment Centre - Legok</p>
+                        <p>JadiDigital Neighborhood Store - Pamulang</p>
+                        <p>JadiDigital Neighborhood Store - Banjarbaru</p>
+                        <p>JadiDigital Neighborhood Store - Yogyakarta</p>
                     </div>
                 </div>
                 <div class="absolute -right-10 -bottom-10 size-64 bg-white/5 blur-3xl rounded-full"></div>
