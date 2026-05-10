@@ -6,7 +6,7 @@ new class extends Component {
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('guest.dashboard');
     }
 };
 ?>
@@ -38,7 +38,7 @@ new class extends Component {
             <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 {{-- Brand --}}
                 <div class="flex shrink-0 items-center">
-                    <a href="{{ route('dashboard') }}"
+                    <a href="{{ route('guest.dashboard') }}"
                         class="text-xl font-black italic tracking-tighter uppercase text-white leading-none">
                         Jadi<span class="text-yellow-500">Digital</span>
                     </a>
@@ -46,7 +46,7 @@ new class extends Component {
 
                 {{-- Desktop Nav Links --}}
                 <div class="hidden sm:ml-8 sm:flex sm:items-center sm:space-x-1">
-                    <a href="{{ route('dashboard') }}"
+                    <a href="{{ route('guest.dashboard') }}"
                         class="rounded-md px-3 py-2 text-sm font-bold uppercase tracking-wide text-gray-300 hover:bg-white/5 hover:text-white transition">
                         Dashboard
                     </a>
@@ -133,6 +133,7 @@ new class extends Component {
                         type="text" placeholder="Cari produk..." autofocus>
                 </div>
 
+                @auth
                 {{-- Cart Icon --}}
                 <button type="button"
                     class="relative rounded-full p-2 text-gray-400 hover:text-white hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition">
@@ -183,6 +184,17 @@ new class extends Component {
                         </div>
                     </div>
                 </div>
+                @else
+                <a href="{{ route('login') }}"
+                    class="rounded-md px-1 py-2 text-sm font-bold uppercase tracking-wide text-gray-300 hover:bg-white/5 hover:text-white transition">
+                    Login
+                </a>
+                <div class="border-l border-white/10 h-6 my-auto"></div>
+                <a href="{{ route('register') }}"
+                    class="rounded-md px-1 py-2 text-sm font-bold uppercase tracking-wide text-gray-300 hover:bg-white/5 hover:text-white transition">
+                    Register
+                </a>
+                @endauth
 
             </div>
         </div>
@@ -197,7 +209,7 @@ new class extends Component {
         x-transition:leave-end="opacity-0 -translate-y-2"
         class="sm:hidden bg-gray-900/95 border-t border-white/10">
         <div class="space-y-1 px-4 py-3">
-            <a href="{{ route('dashboard') }}"
+            <a href="{{ route('guest.dashboard') }}"
                 class="block rounded-lg px-3 py-2 text-sm font-bold uppercase tracking-wide text-gray-300 hover:bg-white/5 hover:text-white transition">
                 Dashboard
             </a>

@@ -25,7 +25,7 @@ new class extends Component
 
         session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended(route('admin.dashboard', absolute: false));
     }
 
     public function rendering($view)

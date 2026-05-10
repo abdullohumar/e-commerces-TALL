@@ -1,24 +1,6 @@
 <x-layouts.app>
     <div class="bg-gray-400/50 min-h-screen p-4 font-sans text-white sm:px-8 lg:px-17">
-        <div class="relative overflow-hidden rounded-2xl mb-4 h-[500px]">
-            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80"
-                class="absolute inset-0 w-full h-full object-cover" alt="Hero">
-            <div
-                class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex flex-col justify-center px-12">
-                <h1 class="text-5xl font-black italic tracking-tighter uppercase leading-none">New Arrival - <br> Chino
-                    Short</h1>
-                <p class="mt-4 text-gray-300 font-medium">Flexi Fit - Anti Kusut, flexible, cool</p>
-                <button
-                    class="mt-8 bg-yellow-500 text-black font-bold py-3 px-8 rounded-lg w-fit hover:bg-yellow-400 transition">
-                    Harus punya!
-                </button>
-            </div>
-            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-                <template x-for="i in 10">
-                    <div class="size-2 rounded-full bg-white/30" :class="i === 5 ? 'bg-white w-4' : ''"></div>
-                </template>
-            </div>
-        </div>
+        <livewire:hero-banner />
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div
