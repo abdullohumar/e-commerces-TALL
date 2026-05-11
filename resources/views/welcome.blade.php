@@ -4,41 +4,75 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div
-                class="bg-gradient-to-b from-yellow-400 to-yellow-600 rounded-2xl p-8 text-black flex flex-col justify-between h-[400px]">
-                <div>
-                    <h2 class="text-2xl font-black italic leading-tight uppercase">Kenapa harus beli di website JadiDigital
+                class="promo-card text-gray-300 tracking-wide relative overflow-hidden rounded-2xl p-8 flex flex-col justify-between h-[400px]">
+                <!-- Background Overlay -->
+                <div class="absolute bg-gradient-to-t from-black to-yellow-600/80 inset-0 z-0"></div>
+
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-black italic leading-tight uppercase [-webkit-text-stroke:_0.5px_black]">
+                        Kenapa harus dari Jadi<span class="text-yellow-500">Digital</span>?
                     </h2>
-                    <ul class="mt-4 space-y-1 font-bold text-sm">
-                        <li>• Gratis Ongkir</li>
-                        <li>• Jaminan Return/Refund</li>
+                    <ul class="mt-4 space-y-2 font-bold text-sm">
+                        <li class="flex items-center gap-2">
+                            <span class="text-yellow-500">✔</span> Teknologi Modern & Scalable
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-yellow-500">✔</span> Desain Eksklusif & UI/UX Friendly
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-yellow-500">✔</span> Maintenance Selama Masa Subscription
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="text-yellow-500">✔</span> Konsultasi Strategi Bisnis Gratis
+                        </li>
                     </ul>
                     <button
-                        class="mt-6 bg-black text-white px-6 py-2 rounded-md text-xs font-bold uppercase">Selengkapnya</button>
+                        class="mt-6 bg-yellow-500 text-black px-6 py-2 rounded-md text-xs font-bold uppercase hover:bg-yellow-600 transition border border-yellow-500">
+                        Selengkapnya
+                    </button>
                 </div>
-                <div class="flex justify-around items-end">
+
+                <!-- Ikon yang disesuaikan dengan poin di atas -->
+                <div class="relative z-10 grid grid-cols-4 gap-1 items-end">
+                    <!-- 1. Teknologi Modern -->
                     <div class="text-center">
                         <div
-                            class="size-12 mx-auto mb-2 bg-white/20 rounded-xl flex items-center justify-center border border-black">
-                            🚚</div>
-                        <p class="text-[10px] font-black uppercase">Gratis Ongkir</p>
+                            class="size-10 mx-auto mb-2 bg-white/10 rounded-lg flex items-center justify-center border border-white/20">
+                            🚀
+                        </div>
+                        <p class="text-[8px] font-black uppercase leading-tight">Modern &<br>Scalable</p>
                     </div>
+
+                    <!-- 2. Desain Eksklusif -->
                     <div class="text-center">
                         <div
-                            class="size-12 mx-auto mb-2 bg-white/20 rounded-xl flex items-center justify-center border border-black">
-                            📦</div>
-                        <p class="text-[10px] font-black uppercase leading-tight">Pengembalian<br>Barang / Dana</p>
+                            class="size-10 mx-auto mb-2 bg-white/10 rounded-lg flex items-center justify-center border border-white/20">
+                            🎨
+                        </div>
+                        <p class="text-[8px] font-black uppercase leading-tight">Exclusive<br>Design</p>
+                    </div>
+
+                    <!-- 3. Garansi & Security -->
+                    <div class="text-center">
+                        <div
+                            class="size-10 mx-auto mb-2 bg-white/10 rounded-lg flex items-center justify-center border border-white/20">
+                            🛡️
+                        </div>
+                        <p class="text-[8px] font-black uppercase leading-tight">Warranty<br>& Secure</p>
+                    </div>
+
+                    <!-- 4. Konsultasi Gratis -->
+                    <div class="text-center">
+                        <div
+                            class="size-10 mx-auto mb-2 bg-white/10 rounded-lg flex items-center justify-center border border-white/20">
+                            💡
+                        </div>
+                        <p class="text-[8px] font-black uppercase leading-tight">Free<br>Consult</p>
                     </div>
                 </div>
             </div>
 
-            <div class="relative overflow-hidden rounded-2xl h-[400px]">
-                <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&q=80"
-                    class="absolute inset-0 w-full h-full object-cover" alt="Oxford Shirt">
-                <div class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center">
-                    <span class="text-xs font-bold uppercase tracking-widest mb-1">New Arrival</span>
-                    <h2 class="text-4xl font-black italic uppercase leading-none">Oxford <br> Shirt</h2>
-                </div>
-            </div>
+            <livewire:newest-product/>
 
             <div
                 class="bg-gray-900 rounded-2xl p-8 flex flex-col h-[400px] border border-white/5 relative overflow-hidden">
