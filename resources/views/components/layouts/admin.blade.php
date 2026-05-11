@@ -13,7 +13,7 @@
     </head>
     <body class="antialiased font-brand h-screen overflow-hidden flex">
         <livewire:sidebar-admin/>
-        <main class="flex-1 overflow-y-auto bg-gray-900 text-white p-8">
+        <main class="flex-1 overflow-y-auto bg-gray-900 text-white">
             {{ $slot }}
         </main>
 
