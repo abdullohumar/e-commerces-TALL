@@ -25,7 +25,7 @@ new class extends Component {
             'cta_text' => 'nullable|string|max:255',
         ]);
 
-        if ($banner_id) {
+        if ($this->banner_id) {
             $banner = HeroBanner::findOrFail($this->banner_id);
             $imagePath = $banner->image_path;
 
@@ -44,7 +44,7 @@ new class extends Component {
             $message = 'Banner berhasil diupdate!';
         } else {
             $imagePath = $this->image->store('hero_banners', 'public');
-    
+
             HeroBanner::create([
                 'title' => $this->title,
                 'subtitle' => $this->subtitle,
@@ -54,7 +54,6 @@ new class extends Component {
 
             $message = 'Banner baru berhasil ditambahkan!';
         }
-
 
         $this->reset(['title', 'subtitle', 'cta_text', 'image', 'banner_id', 'old_image']);
         $this->heroBanners = HeroBanner::latest()->get();
@@ -73,10 +72,15 @@ new class extends Component {
         $this->image = null;
     }
 
+    public function cancelEdit()
+    {
+        $this->reset(['title', 'subtitle', 'cta_text', 'image', 'banner_id', 'old_image']);
+    }
+
     public function delete($id)
     {
         $banner = HeroBanner::findOrFail($id);
-        if($banner->image_path) {
+        if ($banner->image_path) {
             Storage::disk('public')->delete($banner->image_path);
         }
         $banner->delete();
@@ -291,20 +295,29 @@ new class extends Component {
                                 Batal Edit
                             </button>
                         @else
-                            <button type="button" wire:click="$refresh"
+                            <button type="button" wire:click="cancelEdit"
                                 class="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white border border-white/10 rounded-xl hover:bg-white/5 transition">
                                 Reset
                             </button>
                         @endif
-                        <button type="submit" class="...">
-                            <span wire:loading.remove wire:target="save">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4 inline -mt-0.5" fill="none"
+                        <button type="submit"  
+                            @if (empty($title) || (!$banner_id && empty($image))) 
+                                disabled 
+                            @endif
+                            wire:loading.attr="disabled" wire:target="save"
+                            class="inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-xl text-black bg-yellow-500 transition disabled:opacity-50 disabled:cursor-not-allowed enabled:hover:bg-yellow-400">
+
+                            {{-- Ikon & Teks saat Normal --}}
+                            <span wire:loading.remove wire:target="save" class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none"
                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                 </svg>
-                                Simpan Banner
+                                {{ $banner_id ? 'Update Banner' : 'Simpan Banner' }}
                             </span>
-                            <span wire:loading wire:target="store" class="flex items-center gap-2">
+
+                            {{-- Ikon & Teks saat Loading --}}
+                            <span wire:loading wire:target="save" class="flex items-center gap-2">
                                 <svg class="animate-spin size-4" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24">
                                     <circle class="opacity-25" cx="12" cy="12" r="10"
@@ -312,9 +325,8 @@ new class extends Component {
                                     <path class="opacity-75" fill="currentColor"
                                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
                                 </svg>
-                                {{ $banner_id ? 'Simpan Perubahan' : 'Simpan Banner' }}
+                                Menyimpan...
                             </span>
-                            <span wire:loading wire:target="save">Menyimpan...</span>
                         </button>
                     </div>
                 </div>
@@ -336,9 +348,11 @@ new class extends Component {
 
                 <div
                     class="absolute inset-0 font-inter flex flex-col items-center justify-center gap-2 bg-black/60 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
-                    <button class="px-4 py-1 bg-yellow-500 text-black text-sm font-bold rounded" wire:click="edit({{ $banner->id }})">Edit</button>
+                    <button class="px-4 py-1 bg-yellow-500 text-black text-sm font-bold rounded"
+                        wire:click="edit({{ $banner->id }})">Edit</button>
                     <button class="px-4 py-1 bg-red-500 text-white text-sm font-bold rounded"
-                        onclick="confirm('Yakin ingin menghapus banner?')" wire:click="delete({{ $banner->id }})">Delete</button>
+                        onclick="confirm('Yakin ingin menghapus banner?')"
+                        wire:click="delete({{ $banner->id }})">Delete</button>
                 </div>
             </div>
         @endforeach
