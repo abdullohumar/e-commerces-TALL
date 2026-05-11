@@ -14,6 +14,7 @@ new class extends Component {
     public string $title = '';
     public string $subtitle = '';
     public ?string $cta_text = null;
+    public ?string $cta_link = null;
     public $image = null;
 
     public function save()
@@ -23,6 +24,7 @@ new class extends Component {
             'subtitle' => 'required|string',
             'image' => $this->banner_id ? 'nullable|image|max:2048' : 'required|image|max:2048',
             'cta_text' => 'nullable|string|max:255',
+            'cta_link' => 'nullable|url|max:255',
         ]);
 
         if ($this->banner_id) {
@@ -38,6 +40,7 @@ new class extends Component {
                 'title' => $this->title,
                 'subtitle' => $this->subtitle,
                 'cta_text' => $this->cta_text,
+                'cta_link' => $this->cta_link,
                 'image_path' => $imagePath,
             ]);
 
@@ -50,12 +53,13 @@ new class extends Component {
                 'subtitle' => $this->subtitle,
                 'image_path' => $imagePath,
                 'cta_text' => $this->cta_text,
+                'cta_link' => $this->cta_link,
             ]);
 
             $message = 'Banner baru berhasil ditambahkan!';
         }
 
-        $this->reset(['title', 'subtitle', 'cta_text', 'image', 'banner_id', 'old_image']);
+        $this->reset(['title', 'subtitle', 'cta_text', 'cta_link', 'image', 'banner_id', 'old_image']);
         $this->heroBanners = HeroBanner::latest()->get();
         session()->flash('success', $message);
     }
@@ -68,13 +72,14 @@ new class extends Component {
         $this->title = $banner->title;
         $this->subtitle = $banner->subtitle;
         $this->cta_text = $banner->cta_text;
+        $this->cta_link = $banner->cta_link;
         $this->old_image = $banner->image_path;
         $this->image = null;
     }
 
     public function cancelEdit()
     {
-        $this->reset(['title', 'subtitle', 'cta_text', 'image', 'banner_id', 'old_image']);
+        $this->reset(['title', 'subtitle', 'cta_text', 'cta_link', 'image', 'banner_id', 'old_image']);
     }
 
     public function delete($id)
@@ -138,7 +143,7 @@ new class extends Component {
                 </div>
                 <div>
                     <h2 class="text-sm font-semibold text-white">
-                        {{ $banner_id ? 'Edit Banner: ' . $title : 'Tambah Banner Baru' }}
+                        {{ $this->banner_id ? 'Edit Banner: ' . $this->title : 'Tambah Banner Baru' }}
                     </h2>
                     <p class="text-xs text-gray-500">
                         {{ $banner_id ? 'Ubah data banner yang dipilih' : 'Isi semua field yang diperlukan' }}
@@ -259,7 +264,7 @@ new class extends Component {
 
                 {{-- CTA Text --}}
                 <div class="px-6 py-5 border-b border-white/10">
-                    <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+                    <div class="flex flex-col sm:flex-row sm:items-start gap-4 mb-4">
                         <div class="sm:w-1/3">
                             <label for="cta_text" class="block text-sm font-semibold text-white">
                                 Teks Tombol
@@ -272,6 +277,31 @@ new class extends Component {
                                 placeholder="Contoh: Harus punya!"
                                 class="block w-full rounded-xl border border-white/10 bg-gray-900/60 px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition">
                             @error('cta_text')
+                                <p class="mt-1.5 text-xs text-yellow-400 flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-3.5" fill="none"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                                    </svg>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row sm:items-start gap-4">
+                        <div class="sm:w-1/3">
+                            <label for="cta_link" class="block text-sm font-semibold text-white">
+                                Link CTA
+                                <span class="ml-1 text-xs font-normal text-gray-500">(opsional)</span>
+                            </label>
+                            <p class="mt-0.5 text-xs text-gray-500">Link untuk tombol call-to-action</p>
+                        </div>
+
+                        <div class="sm:w-2/3">
+                            <input wire:model="cta_link" type="text" id="cta_link"
+                                placeholder="Contoh: https://example.com/product/123"
+                                class="mt-4 block w-full rounded-xl border border-white/10 bg-gray-900/60 px-4 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition">
+                            @error('cta_link')
                                 <p class="mt-1.5 text-xs text-yellow-400 flex items-center gap-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="size-3.5" fill="none"
                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -300,10 +330,7 @@ new class extends Component {
                                 Reset
                             </button>
                         @endif
-                        <button type="submit"  
-                            @if (empty($title) || (!$banner_id && empty($image))) 
-                                disabled 
-                            @endif
+                        <button type="submit" @if (empty($title) || (!$banner_id && empty($image))) disabled @endif
                             wire:loading.attr="disabled" wire:target="save"
                             class="inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-xl text-black bg-yellow-500 transition disabled:opacity-50 disabled:cursor-not-allowed enabled:hover:bg-yellow-400">
 

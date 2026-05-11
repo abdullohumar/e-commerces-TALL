@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('subtitle');
             $table->string('image_path');
             $table->string('cta_text')->nullable();
+            $table->string('cta_link')->nullable();
             $table->timestamps();
         });
     }

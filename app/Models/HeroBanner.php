@@ -11,5 +11,6 @@ class HeroBanner extends Model
         'subtitle',
         'image_path',
         'cta_text',
+        'cta_link',
     ];
 }

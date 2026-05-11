@@ -36,7 +36,8 @@ new class extends Component {
         <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80"
             class="absolute inset-0 w-full h-full object-cover" alt="Hero">
         <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex flex-col justify-center px-12">
-            <h1 class="text-5xl font-black italic tracking-tighter uppercase leading-none">Welcome <br> To JadiDigital</h1>
+            <h1 class="text-5xl font-black italic tracking-tighter uppercase leading-none">Welcome <br> To JadiDigital
+            </h1>
             <p class="mt-4 text-gray-300 font-medium">Belum ada banner. Tambahkan di halaman admin.</p>
         </div>
     </div>
@@ -62,10 +63,10 @@ new class extends Component {
                         <p class="mt-4 text-gray-300 font-medium">{{ $banner->subtitle }}</p>
                     @endif
                     @if ($banner->cta_text)
-                        <button
+                        <a href="{{ $banner->cta_link ?? '#' }}"
                             class="mt-8 bg-yellow-500 text-black font-bold py-3 px-8 rounded-lg w-fit hover:bg-yellow-400 transition pointer-events-auto">
                             {{ $banner->cta_text }}
-                        </button>
+                        </a>
                     @endif
                 </div>
             </div>
@@ -75,15 +76,15 @@ new class extends Component {
         @if ($heroBanners->count() > 1)
             <button wire:click="prev"
                 class="absolute left-4 top-1/2 -translate-y-1/2 z-10 size-10 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/60 text-white transition backdrop-blur-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
             </button>
             <button wire:click="next"
                 class="absolute right-4 top-1/2 -translate-y-1/2 z-10 size-10 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/60 text-white transition backdrop-blur-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                    stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                 </svg>
             </button>
