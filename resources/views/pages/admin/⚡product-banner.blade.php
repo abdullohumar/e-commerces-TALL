@@ -10,7 +10,7 @@ use App\Models\Category;
 new class extends Component {
     use WithFileUploads;
 
-    public $product_id;
+    public $product_id, $products;
     public $category_id, $name, $slug, $short_description, $long_description, $price, $discount_price;
     public $image_path = [];
     public $categories = [];
@@ -18,6 +18,7 @@ new class extends Component {
     public function mount()
     {
         $this->categories = Category::orderBy('name')->get();
+        $this->products = Product::latest()->get();
     }
 
     public function updatedName($value)
@@ -111,6 +112,7 @@ new class extends Component {
             'old_images'
         ]);
 
+        $this->products = Product::latest()->get();
         session()->flash('success', $message);
     }
 
@@ -130,6 +132,18 @@ new class extends Component {
         $this->image_path = [];                 // reset upload baru
     }
 
+    public function delete($id)
+    {
+        $product = Product::findOrFail($id);
+        if($product->images) {
+            Storage::disk('public')->delete($product->images);
+        }
+        $product->delete();
+
+        $this->products = Product::latest()->get();
+        session()->flash('success', 'Produk berhasil dihapus');
+    }
+
     public function rendering($view)
     {
         $view->layout('components.layouts.admin');
@@ -137,8 +151,8 @@ new class extends Component {
 };
 ?>
 
-<div class="font-inter p-6">
-    <div class="max-w-3xl">
+<div class="font-inter p-6 overflow-hidden h-screen flex">
+    <div class="scrollbar min-w-3xl overflow-y-auto">
 
         {{-- Header --}}
         <div class="mb-6 pb-5 border-b border-white/10">
@@ -387,5 +401,27 @@ new class extends Component {
             </form>
         </div>
 
+    </div>
+    <div class="scrollbar overflow-y-auto flex flex-col p-6">
+        @foreach ($products as $product)
+            <div class="group relative">
+                <img src="{{ Storage::url($product->images->first()->image_path) }}" alt="{{ $product->title }}"
+                    class="border border-white/10 rounded-md h-50">
+                <div
+                    class="absolute inset-0 font-inter flex flex-col justify-end p-4 bg-gradient-to-tr from-black to-transparent transition-opacity duration-300 group-hover:opacity-0 group-hover:pointer-events-none">
+                    <h3 class="text-yellow-500 font-bold">{{ $product->title }}</h3>
+                    <p class="text-xs text-white">{{ $product->subtitle }}</p>
+                </div>
+
+                <div
+                    class="absolute inset-0 font-inter flex flex-col items-center justify-center gap-2 bg-black/60 transition-opacity duration-300 opacity-0 group-hover:opacity-100">
+                    <button class="px-4 py-1 bg-yellow-500 text-black text-sm font-bold rounded"
+                        wire:click="edit({{ $product->id }})">Edit</button>
+                    <button class="px-4 py-1 bg-red-500 text-white text-sm font-bold rounded"
+                        onclick="confirm('Yakin ingin menghapus banner?')"
+                        wire:click="delete({{ $product->id }})">Delete</button>
+                </div>
+            </div>
+        @endforeach
     </div>
 </div>
