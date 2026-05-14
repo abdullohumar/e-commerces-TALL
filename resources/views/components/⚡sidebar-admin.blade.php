@@ -28,7 +28,7 @@ new class extends Component {
             <a href="{{ route('admin.hero-banner') }}" class="text-md font-semibold text-gray-300">Hero Banner</a>
         </div>
         <div class="w-full h-15 flex items-center px-7">
-            <a href="#" class="text-md font-semibold text-gray-300">Product Banner</a>
+            <a href="{{ route('admin.product-banner') }}" class="text-md font-semibold text-gray-300">Product Banner</a>
         </div>
         <div class="w-full h-15 flex items-center px-7 border-b border-white/10">
             <a href="#" class="text-md font-semibold text-gray-300">Promo Banner</a>

@@ -32,7 +32,7 @@ new class extends Component {
 
 {{-- Jika tidak ada data banner, tampilkan fallback --}}
 @if ($heroBanners->isEmpty())
-    <div class="relative overflow-hidden rounded-2xl mb-4 h-[500px]">
+    <div class="relative overflow-hidden mb-4 h-[800px]">
         <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80"
             class="absolute inset-0 w-full h-full object-cover" alt="Hero">
         <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex flex-col justify-center px-12">
@@ -42,7 +42,7 @@ new class extends Component {
         </div>
     </div>
 @else
-    <div class="relative overflow-hidden rounded-2xl mb-4 h-[500px]">
+    <div class="relative overflow-hidden mb-4 h-[500px]">
 
         {{-- Slides --}}
         @foreach ($heroBanners as $i => $banner)

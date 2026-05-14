@@ -106,8 +106,8 @@ new class extends Component {
 };
 ?>
 
-<div class="flex overflow-hidden h-screen p-6">
-    <div class="scrollbar font-inter min-w-3xl border-r border-white/10 pr-6 overflow-y-auto">
+<div class="flex flex-col xl:flex-row overflow-hidden h-screen p-6">
+    <div class="scrollbar font-inter xl:min-w-3xl border-r border-white/10 pr-6 overflow-y-auto">
 
         {{-- Page Header --}}
         <div class="mb-6 pb-5 border-b border-white/10">

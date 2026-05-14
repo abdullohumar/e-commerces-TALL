@@ -20,7 +20,7 @@ new class extends Component
         User::create([
             'name' => $this->name,
             'email' => $this->email,
-            'password' => Hash::make($this->password),
+            'password' => bcrypt($this->password),
         ]);
 
         return redirect()->route('login');
