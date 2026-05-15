@@ -42,7 +42,7 @@ new class extends Component {
         </div>
     </div>
 @else
-    <div class="relative overflow-hidden mb-4 h-[500px]">
+    <div class="relative overflow-hidden mb-4 h-[500px] rounded-md">
 
         {{-- Slides --}}
         @foreach ($heroBanners as $i => $banner)

@@ -2,7 +2,7 @@
     <div class="bg-gray-400/50 min-h-screen p-4 font-sans text-white sm:px-8 lg:px-17">
         <livewire:hero-banner />
 
-        <div class="w-full h-[2px] bg-gray-800 rounded-md -mt-2"></div>
+        <div class="w-full h-[2px] bg-gray-800 rounded-lg -mt-2"></div>
 
         <livewire:guest-catalog />
 
